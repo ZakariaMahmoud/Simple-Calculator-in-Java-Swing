@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 
 public class Main extends JFrame {
 
-    JButton dec, bin, oct, hex, b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, comma, plus, equal, minus, divide, multiple, clear, back;
+    JButton scientific, bin, oct, hex, b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, comma, plus, equal, minus, divide, multiple, clear, back;
 
     JTextField textField;
     JLabel oldValueLabel, operandLabel;
@@ -57,7 +57,7 @@ public class Main extends JFrame {
             }
         } catch (Exception ignored) {
         }
-        dec = new JButton("DEC");
+        scientific = new JButton("Scientific");
         bin = new JButton("BIN");
         oct = new JButton("OCT");
         hex = new JButton("HEX");
@@ -104,7 +104,7 @@ public class Main extends JFrame {
         equal.setBounds(202, 170, 45, 87);
         b0.setBounds(10, 215, 93, 42);
 
-        dec.setBounds(250, 80, 93, 42);
+        scientific.setBounds(250, 80, 93, 42);
         bin.setBounds(250, 125, 93, 42);
         oct.setBounds(250, 170, 93, 42);
         hex.setBounds(250, 215, 93, 42);
@@ -179,7 +179,9 @@ public class Main extends JFrame {
         back.setBackground(new Color(255, 128, 0));
         getContentPane().setBackground(Color.black);
 
-        add(dec);
+
+
+        add(scientific);
         add(bin);
         add(hex);
         add(oct);
@@ -496,12 +498,11 @@ public class Main extends JFrame {
                     oldAnswer = 0;
                     num = 0;
                     noClickedOperator = true;
-                } else if (e.getSource() == dec) {
-                    if (!textField.getText().equals("")) {
-                        String value = textField.getText();
-                        int txt = Integer.parseInt(value);
-                        textField.setText(String.valueOf(txt));
-                    }
+                } else if (e.getSource() ==scientific ) {
+                    setVisible(false);
+
+                    Scientific calc= new Scientific();
+                    calc.setVisible(true);
 
                 } else if (e.getSource() == bin) {
                     if (!textField.getText().equals("")) {
@@ -539,7 +540,7 @@ public class Main extends JFrame {
         b7.addActionListener(actionListener);
         b8.addActionListener(actionListener);
         b9.addActionListener(actionListener);
-        dec.addActionListener(actionListener);
+        scientific.addActionListener(actionListener);
         bin.addActionListener(actionListener);
         oct.addActionListener(actionListener);
         hex.addActionListener(actionListener);
@@ -553,12 +554,12 @@ public class Main extends JFrame {
         back.addActionListener(actionListener);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Calculator");
+        setTitle("Simple Calculator");
         setSize(352, 300);
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(null);
-        setVisible(true);
+
     }
 
     public Main() {
@@ -569,7 +570,11 @@ public class Main extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Main();
+                Main main =new Main();
+
+                main.setVisible(true);
+
+
             }
         });
     }
